@@ -13,10 +13,10 @@ def priority(ascii_num):
 
 f=open('input.txt','r')
 lines = f.readlines()
-for l in lines:
+for lin in lines:
     #part 1
-    line=l.replace("\n","")
-    ind = int(len(l)/2)
+    line=lin.replace("\n","")
+    ind = int(len(line)/2)
     ascii_num =ord(set.intersection(set(line[:ind]),set(line[ind:])).pop())
     num=priority(ascii_num)
     sum0 += num
