@@ -14,6 +14,16 @@ maxscore = 0
 nrow = len(mat)
 ncol = len(mat[0])
 
+
+def factor(lst,value):
+    ff =  [m for m, n in enumerate(lst) if n >= value ]
+    if len(ff) == 0:
+        f = len(lst)
+    else:
+        f = min(ff)+1
+    return f
+    
+
 for i in range(1,nrow-1):
     for j in range(1,ncol-1):
         
@@ -42,34 +52,16 @@ for i in range(1,nrow-1):
                 down.append(mat[k][j])
                 
         if max(left) < mat[i][j] or max(right) < mat[i][j] or max(up) < mat[i][j] or max(down) < mat[i][j]:
+            #part 1
             visible += 1
 
             #part2
             left.reverse()
-            ll =  [m for m, n in enumerate(left) if n >= mat[i][j] ]
-            if len(ll) == 0:
-                l = len(left)
-            else:
-                l = min(ll)+1
-                
-            rr =  [m for m, n in enumerate(right) if n >= mat[i][j] ]
-            if len(rr) == 0:
-                r = len(right)
-            else:
-                r = min(rr)+1
-                
             up.reverse()
-            uu =  [m for m, n in enumerate(up) if n >= mat[i][j] ]
-            if len(uu) == 0:
-                u = len(up)
-            else:
-                u = min(uu)+1
-                            
-            dd =  [m for m, n in enumerate(down) if n >= mat[i][j] ]
-            if len(dd) == 0:
-                d = len(down)
-            else:
-                d = min(dd)+1
+            l=factor(left,mat[i][j])
+            r=factor(right,mat[i][j])
+            u=factor(up,mat[i][j])
+            d=factor(down,mat[i][j])
             
             score=l*r*u*d
             if score > maxscore:
